@@ -100,13 +100,14 @@ int main(int argc, char **argv){
 void affichage(){
 
 	int i,j;
-	int depth = 5;
+	int depth = 1;
 
 	// effacement de l'image avec la couleur de fond
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLoadIdentity();
 
+	glPushMatrix();
 	gluLookAt(depth * sin(theta) * cos(phi), depth * sin(phi), depth * cos(theta) * cos(phi),
               0,0,0,
               0,1,0);
@@ -123,10 +124,12 @@ void affichage(){
 		glEnd();
 	}
 
+
 	// On force l'affichage du résultat
 	glFlush();
 	// On échange les buffers
 	glutSwapBuffers();
+	glPopMatrix();
 }
 
 
@@ -164,12 +167,12 @@ void clavier(unsigned char touche,int x,int y){
 
 
 void reshape(int x,int y)
-{/*
+{
 	if (x < y)
 		//glViewport(0,(y-x)/2,x,x);
 		glViewport(0,50,54,x);
 	else
-		glViewport((x-y)/2,0,y,y);*/
+		glViewport((x-y)/2,0,y,y);
 }
 
 
