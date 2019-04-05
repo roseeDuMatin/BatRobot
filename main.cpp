@@ -100,18 +100,21 @@ int main(int argc, char **argv){
 void affichage(){
 
 	int i,j;
-	int depth = 1;
+	int depth = 5;
 
 	// effacement de l'image avec la couleur de fond
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
 
 	glLoadIdentity();
 
-	glPushMatrix();
+
 	gluLookAt(depth * sin(theta) * cos(phi), depth * sin(phi), depth * cos(theta) * cos(phi),
               0,0,0,
               0,1,0);
+    //glTranslatef(0.0f, 0.0f, -depth);
 
+    glPushMatrix();
 	// dessin du cube
 	for (i = 0;i < 6;i++)
 	{
@@ -123,13 +126,13 @@ void affichage(){
 		}
 		glEnd();
 	}
-
+    glPopMatrix();
 
 	// On force l'affichage du résultat
 	glFlush();
 	// On échange les buffers
 	glutSwapBuffers();
-	glPopMatrix();
+
 }
 
 
@@ -168,11 +171,10 @@ void clavier(unsigned char touche,int x,int y){
 
 void reshape(int x,int y)
 {
-	if (x < y)
-		//glViewport(0,(y-x)/2,x,x);
-		glViewport(0,50,54,x);
-	else
-		glViewport((x-y)/2,0,y,y);
+    glViewport(0, 0,(GLsizei) 500, (GLsizei) 500);
+    glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+    gluPerspective(60.0, (GLfloat) 500 / (GLfloat) 500, 1.0,	200.0);
 }
 
 
@@ -198,7 +200,7 @@ void mousemotion(int x,int y)
 	{
 		/* On modifie les angles de rotation de l'objet en fonction de la
 		position actuelle de la souris et de la dernière position suvegardée*/
-		theta = theta + (x - xold) * M_PI / 180;
+		theta = theta - (x - xold) * M_PI / 180;
 		phi = phi + (y - yold) * M_PI / 180;
 		glutPostRedisplay(); // Rafraichissement de l'affichage
 	}
