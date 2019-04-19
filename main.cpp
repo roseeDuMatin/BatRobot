@@ -5,11 +5,11 @@
 /*******************************************************/
 /*													   */
 /*   Didactitiel OpenGL sous Glut                      */
-/*   ESGI : 2I année         						   */
+/*   ESGI : 2I annï¿½e         						   */
 /*													   */
 /*******************************************************/
 /*													   */
-/*  Objectif : afficher à l'écran un cube en 3D        */
+/*  Objectif : afficher ï¿½ l'ï¿½cran un cube en 3D        */
 /*													   */
 /*******************************************************/
 
@@ -89,7 +89,7 @@ int main(int argc, char **argv){
 	glutMouseFunc(mouse);
 	glutMotionFunc(mousemotion);
 
-	/* Entrée dans la boucle principale de glut */
+	/* Entrï¿½e dans la boucle principale de glut */
     glutMainLoop();
     return 0;
 }
@@ -119,18 +119,16 @@ void affichage(){
 	for (i = 0;i < 6;i++)
 	{
 		glBegin(GL_POLYGON);
-		for (j = 0;j < 4;j++)
-		{
-			glColor3f(p[f[i][j]].r,p[f[i][j]].g,p[f[i][j]].b);
-			glVertex3f(p[f[i][j]].x,p[f[i][j]].y,p[f[i][j]].z);
-		}
+		glColor3f(0.3, 0.3, 0.3);
+		GLUquadricObj *p = gluNewQuadric();
+		gluCylinder(p, 1.0, 1, 3, 30, 30);
 		glEnd();
 	}
     glPopMatrix();
 
-	// On force l'affichage du résultat
+	// On force l'affichage du rï¿½sultat
 	glFlush();
-	// On échange les buffers
+	// On ï¿½change les buffers
 	glutSwapBuffers();
 
 }
@@ -141,8 +139,7 @@ void affichage(){
 void clavier(unsigned char touche,int x,int y){
 	switch (touche){
 
-
-        case 'z':/*affichage du carré plein*/
+        case 'z':/*affichage du carrï¿½ plein*/
 			depth-=0.1;
 			glutPostRedisplay();
 			break;
@@ -171,22 +168,22 @@ void mouse(int button,int state,int x,int y)
 	// Si on appuie sur le bouton de gauche
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
-		presse = 1; //le booleen presse passe à 1 (vrai)
+		presse = 1; //le booleen presse passe ï¿½ 1 (vrai)
 		xold = x; //on sauvegardela position de la souris
 		yold = y;
 	}
 	// Si on relache le bouton gauche
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
-		presse = 0; //le booleen presse passe à 0 (faux)
+		presse = 0; //le booleen presse passe ï¿½ 0 (faux)
 }
 
 
 void mousemotion(int x,int y)
 {
-	if (presse) // si le bouton de gauche est pressé
+	if (presse) // si le bouton de gauche est pressï¿½
 	{
 		/* On modifie les angles de rotation de l'objet en fonction de la
-		position actuelle de la souris et de la dernière position suvegardée*/
+		position actuelle de la souris et de la derniï¿½re position suvegardï¿½e*/
 		theta = theta - (x - xold) * M_PI / 180;
 		phi = phi + (y - yold) * M_PI / 180;
 		glutPostRedisplay(); // Rafraichissement de l'affichage
