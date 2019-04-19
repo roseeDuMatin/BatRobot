@@ -127,15 +127,20 @@ void affichage(){
     //glTranslatef(0.0f, 0.0f, -depth);
 
     glPushMatrix();
-	// dessin du cube
-	for (i = 0;i < 6;i++)
-	{
+
 		glBegin(GL_POLYGON);
 		glColor3f(0.3, 0.3, 0.3);
-		GLUquadricObj *p = gluNewQuadric();
-		gluCylinder(p, 1.0, 1, 3, 30, 30);
+		
+		GLUquadricObj *torso = gluNewQuadric();
+		gluCylinder(torso, 1.0, 1, 3, 30, 30);
+
+		glPushMatrix();
+			glTranslatef(2.0, 0.0, 0.0);
+			glBegin(GL_POLYGON);
+				GLUquadricObj *bottom = gluNewQuadric();
+				gluSphere(bottom, 0.65, 30, 30);
+		glPopMatrix();
 		glEnd();
-	}
     glPopMatrix();
 
 	// On force l'affichage du r�sultat
