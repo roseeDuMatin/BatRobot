@@ -138,7 +138,7 @@ void affichage(){
 			// torso-top
 			glPushMatrix();
 				glTranslatef(0, 0, 0.5);
-				//gluDisk(torso, 0, 0.5, 30, 2);
+				gluDisk(torso, 0, 0.5, 30, 2);
 			glPopMatrix();
 
 			// bottom
