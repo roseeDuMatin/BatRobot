@@ -136,6 +136,8 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
     glMaterialfv(GL_FRONT, GL_SHININESS, low_shininess);
     glPushMatrix();
 		glColor3f(0.3, 0.3, 0.3);
+
+		// Torso
 		glPushMatrix();
 			GLUquadricObj *torso = gluNewQuadric();
 			// head
@@ -161,10 +163,102 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 				glTranslatef(0, 0, -0.5);
 				gluSphere(torso, 0.35, 40, 30);
 			glPopMatrix();
-
-
 		glPopMatrix();
 
+		// Arms
+		// leftArm
+		glPushMatrix();
+			GLUquadricObj *leftArm = gluNewQuadric();
+			glPushMatrix();
+				glTranslatef(0.75, 0, 0.80);
+				gluSphere(leftArm, 0.25, 40, 30);
+				glPushMatrix();
+					glRotatef(150, 0, 1, 0);
+					glTranslatef(0, 0, 0.3);
+					gluCylinder(leftArm, 0.125, 0.125, 0.75, 30, 30);
+					glPushMatrix();
+						glTranslatef(0, 0, 0.95);
+						gluSphere(leftArm, 0.15, 40, 30);
+						glPushMatrix();
+							glRotatef(-120, 0, 1, 0);
+							glTranslatef(0, 0, 0.15);
+							gluCylinder(leftArm, 0.125, 0.125, 2, 30, 30);
+							glPushMatrix();
+								glTranslatef(0, 0, 2.20);
+								gluSphere(leftArm, 0.15, 40, 30);
+								glPushMatrix();
+									glRotatef(100, 0, 1, 0);
+									glTranslatef(0, 0, 0.15);
+									gluCylinder(leftArm, 0.125, 0.125, 1.6, 30, 30);
+								glPopMatrix();
+								glPushMatrix();
+									glRotatef(130, 0, 1, 0);
+									glTranslatef(0, 0, 0.15);
+									gluCylinder(leftArm, 0.125, 0.125, 2, 30, 30);
+								glPopMatrix();
+								glPushMatrix();
+									glRotatef(60, 0, 1, 0);
+									glTranslatef(0, 0, 0.15);
+									gluCylinder(leftArm, 0.125, 0.125, 2, 30, 30);
+								glPopMatrix();
+							glPopMatrix();
+						glPopMatrix();
+					glPopMatrix();
+				glPopMatrix();
+			glPopMatrix();
+		glPopMatrix();
+
+		// rightArm
+		glPushMatrix();
+			glRotatef(180, 0, 1, 0);
+			glRotatef(180, 1, 0, 0);
+			GLUquadricObj *rightArm = gluNewQuadric();
+			glPushMatrix();
+				glTranslatef(0.75, 0, 0.80);
+				gluSphere(leftArm, 0.25, 40, 30);
+				glPushMatrix();
+					glRotatef(150, 0, 1, 0);
+					glTranslatef(0, 0, 0.3);
+					gluCylinder(leftArm, 0.125, 0.125, 0.75, 30, 30);
+					glPushMatrix();
+						glTranslatef(0, 0, 0.95);
+						gluSphere(leftArm, 0.15, 40, 30);
+						glPushMatrix();
+							glRotatef(-120, 0, 1, 0);
+							glTranslatef(0, 0, 0.15);
+							gluCylinder(leftArm, 0.125, 0.125, 2, 30, 30);
+							glPushMatrix();
+								glTranslatef(0, 0, 2.20);
+								gluSphere(leftArm, 0.15, 40, 30);
+								glPushMatrix();
+									glRotatef(100, 0, 1, 0);
+									glTranslatef(0, 0, 0.15);
+									gluCylinder(leftArm, 0.125, 0.125, 1.6, 30, 30);
+								glPopMatrix();
+								glPushMatrix();
+									glRotatef(130, 0, 1, 0);
+									glTranslatef(0, 0, 0.15);
+									gluCylinder(leftArm, 0.125, 0.125, 2, 30, 30);
+								glPopMatrix();
+								glPushMatrix();
+									glRotatef(60, 0, 1, 0);
+									glTranslatef(0, 0, 0.15);
+									gluCylinder(leftArm, 0.125, 0.125, 2, 30, 30);
+								glPopMatrix();
+							glPopMatrix();
+						glPopMatrix();
+					glPopMatrix();
+				glPopMatrix();
+			glPopMatrix();
+		glPopMatrix();
+		glPushMatrix();
+		glPopMatrix();
+
+
+		// Legs
+		glPushMatrix();
+			
+		glPopMatrix();
 
     glPopMatrix();
 
