@@ -54,6 +54,7 @@ int f[6][4]={
 char presse;
 int x,y,xold,yold;
 double theta=0,phi=0;
+double bat = 0;
 double depth = 3;
 
 /* Prototypes de fonctions */
@@ -188,7 +189,9 @@ void clavier(unsigned char touche,int x,int y){
             depth+=0.1;
             glutPostRedisplay();
             break;
-
+        case 'b':
+            bat+=0.1;
+            glutPostRedisplay();
 		case 'q':/* Quitter le programme */
 			exit(0);
 	}
