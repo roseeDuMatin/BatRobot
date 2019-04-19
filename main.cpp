@@ -129,17 +129,27 @@ void affichage(){
 		glColor3f(0.3, 0.3, 0.3);
 		glPushMatrix();
 			GLUquadricObj *torso = gluNewQuadric();
+			// torso
 			gluCylinder(torso, 0.5, 0.5, 1.0, 30, 30);
-			
+
+			// torso-bottom
+			gluDisk(torso, 0, 0.5, 30, 1);
+
+			// torso-top
+			glPushMatrix();
+				glTranslatef(0, 0, 0.5);
+				//gluDisk(torso, 0, 0.5, 30, 2);
+			glPopMatrix();
+
+			// bottom
+			glPushMatrix();
+				glTranslatef(0, 0, -0.5);
+				gluSphere(torso, 0.35, 40, 30);
+			glPopMatrix();
+
 		glPopMatrix();
 
-		glPushMatrix();
-			glTranslatef(0, 0, -0.5);
 
-			GLUquadricObj *bottom = gluNewQuadric();
-			gluSphere(bottom, 0.35, 40, 30);
-
-		glPopMatrix();
     glPopMatrix();
 
 	// On force l'affichage du r�sultat
