@@ -170,6 +170,7 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 		glPushMatrix();
 			GLUquadricObj *leftArm = gluNewQuadric();
 			glPushMatrix();
+                glRotatef(sin(bat)*20, 0,0,1);
 				glTranslatef(0.75, 0, 0.80);
 				gluSphere(leftArm, 0.25, 40, 30);
 				glPushMatrix();
@@ -214,6 +215,7 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 			glRotatef(180, 1, 0, 0);
 			GLUquadricObj *rightArm = gluNewQuadric();
 			glPushMatrix();
+                glRotatef(sin(bat)*-20, 0,0,1);
 				glTranslatef(0.75, 0, 0.80);
 				gluSphere(leftArm, 0.25, 40, 30);
 				glPushMatrix();
@@ -257,7 +259,7 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 
 		// Legs
 		glPushMatrix();
-			
+
 		glPopMatrix();
 
     glPopMatrix();
@@ -286,6 +288,7 @@ void clavier(unsigned char touche,int x,int y){
         case 'b':
             bat+=0.1;
             glutPostRedisplay();
+            break;
 		case 'q':/* Quitter le programme */
 			exit(0);
 	}
