@@ -103,7 +103,6 @@ int main(int argc, char **argv){
 
 void affichage(){
 
-	int i,j;
     GLfloat lightColor0[] = {1.0f, 0.1f, 0.1f, 1.0f};    // Color (0.5, 0.5, 0.5)
 	GLfloat lightPos0[] = {0.0f, 2.0f, 0.0f, 1.0f};      // Positioned at (4, 0, 8)
 	GLfloat ambientColor[] = {0.2f, 0.2f, 0.2f, 1.0f};   // Color (0.2, 0.2, 0.2)
@@ -127,20 +126,20 @@ void affichage(){
     //glTranslatef(0.0f, 0.0f, -depth);
 
     glPushMatrix();
-
-		glBegin(GL_POLYGON);
 		glColor3f(0.3, 0.3, 0.3);
-		
-		GLUquadricObj *torso = gluNewQuadric();
-		gluCylinder(torso, 1.0, 1, 3, 30, 30);
+		glPushMatrix();
+			GLUquadricObj *torso = gluNewQuadric();
+			gluCylinder(torso, 0.5, 0.5, 1.0, 30, 30);
+			
+		glPopMatrix();
 
 		glPushMatrix();
-			glTranslatef(2.0, 0.0, 0.0);
-			glBegin(GL_POLYGON);
-				GLUquadricObj *bottom = gluNewQuadric();
-				gluSphere(bottom, 0.65, 30, 30);
+			glTranslatef(0, 0, -0.5);
+
+			GLUquadricObj *bottom = gluNewQuadric();
+			gluSphere(bottom, 0.35, 40, 30);
+
 		glPopMatrix();
-		glEnd();
     glPopMatrix();
 
 	// On force l'affichage du r�sultat
