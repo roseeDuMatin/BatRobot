@@ -54,6 +54,7 @@ int f[6][4]={
 char presse;
 int x,y,xold,yold;
 double theta=0,phi=0;
+double depth = 3;
 
 /* Prototypes de fonctions */
 void affichage();
@@ -100,7 +101,6 @@ int main(int argc, char **argv){
 void affichage(){
 
 	int i,j;
-	int depth = 5;
 
 	// effacement de l'image avec la couleur de fond
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -141,28 +141,16 @@ void affichage(){
 void clavier(unsigned char touche,int x,int y){
 	switch (touche){
 
-		case 'p':/*affichage du carré plein*/
-			glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
-			glutPostRedisplay();
-			break;
 
-		case 'f':/*affichage en mode fil de fer*/
-			glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+        case 'z':/*affichage du carré plein*/
+			depth-=0.1;
 			glutPostRedisplay();
 			break;
+        case 's':
+            depth+=0.1;
+            glutPostRedisplay();
+            break;
 
-		case 's':/*affichage en mode sommets seuls*/
-			glPolygonMode(GL_FRONT_AND_BACK,GL_POINT);
-			glutPostRedisplay();
-			break;
-		case 'd':
-			glEnable(GL_DEPTH_TEST);
-			glutPostRedisplay();
-			break;
-		case 'D':
-			glDisable(GL_DEPTH_TEST);
-			glutPostRedisplay();
-			break;
 		case 'q':/* Quitter le programme */
 			exit(0);
 	}
@@ -187,7 +175,6 @@ void mouse(int button,int state,int x,int y)
 		xold = x; //on sauvegardela position de la souris
 		yold = y;
 	}
-
 	// Si on relache le bouton gauche
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
 		presse = 0; //le booleen presse passe à 0 (faux)
