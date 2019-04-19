@@ -134,15 +134,37 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
     glLightfv(GL_LIGHT0, GL_SPECULAR, lightColor0);
     glMaterialfv(GL_FRONT, GL_SHININESS, low_shininess);
     glPushMatrix();
-	// dessin du cube
-	for (i = 0;i < 6;i++)
-	{
-		glBegin(GL_POLYGON);
 		glColor3f(0.3, 0.3, 0.3);
-		GLUquadricObj *p = gluNewQuadric();
-		gluCylinder(p, 1.0, 1, 3, 30, 30);
-		glEnd();
-	}
+		glPushMatrix();
+			GLUquadricObj *torso = gluNewQuadric();
+			// head
+			glPushMatrix();
+				glTranslatef(0, 0, 1.75);
+				gluSphere(torso, 0.5, 40, 30);
+			glPopMatrix();
+
+			// torso
+			gluCylinder(torso, 0.5, 0.5, 1.0, 30, 30);
+
+			// torso-top
+			glPushMatrix();
+				glTranslatef(0, 0, 1);
+				gluDisk(torso, 0, 0.5, 30, 1);
+			glPopMatrix();
+
+			// torso-bottom
+			gluDisk(torso, 0, 0.5, 30, 1);
+
+			// bottom
+			glPushMatrix();
+				glTranslatef(0, 0, -0.5);
+				gluSphere(torso, 0.35, 40, 30);
+			glPopMatrix();
+
+
+		glPopMatrix();
+
+
     glPopMatrix();
 
 	// On force l'affichage du r�sultat
