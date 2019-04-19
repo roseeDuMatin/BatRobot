@@ -82,8 +82,11 @@ int main(int argc, char **argv){
 	glPointSize(2.0);
 	glEnable(GL_DEPTH_TEST);
 
+	glEnable(GL_COLOR_MATERIAL);
+    glShadeModel(GL_SMOOTH);
 	glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    glEnable(GL_NORMALIZE);
 
 	/* Enregistrement de fonctions de rappel */
     glutDisplayFunc(affichage);
@@ -103,17 +106,16 @@ int main(int argc, char **argv){
 
 void affichage(){
 
-    GLfloat lightColor0[] = {1.0f, 0.1f, 0.1f, 1.0f};    // Color (0.5, 0.5, 0.5)
-	GLfloat lightPos0[] = {0.0f, 2.0f, 0.0f, 1.0f};      // Positioned at (4, 0, 8)
+	int i,j;
+    GLfloat lightColor0[] = {1.0f, 1.0f, 1.0f, 1.0f};
+	GLfloat lightPos0[] = {0.0f, 1.2f, 1.0f, 1.0f};
 	GLfloat ambientColor[] = {0.2f, 0.2f, 0.2f, 1.0f};   // Color (0.2, 0.2, 0.2)
+	GLfloat low_shininess[] = {5.0};
 
 	// effacement de l'image avec la couleur de fond
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
-	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
 
 	glMatrixMode(GL_MODELVIEW);
 
@@ -125,6 +127,12 @@ void affichage(){
               0,1,0);
     //glTranslatef(0.0f, 0.0f, -depth);
 
+glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, lightColor0);
+    glMaterialfv(GL_FRONT, GL_SHININESS, low_shininess);
     glPushMatrix();
 		glColor3f(0.3, 0.3, 0.3);
 
