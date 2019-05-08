@@ -52,9 +52,10 @@ int f[6][4]={
 	{0,4,7,3}};
 
 char presse;
-int x,y,xold,yold;
-double theta=0,phi=0;
+int x, y, xold, yold;
+double theta = 0, phi = 0;
 double bat = 0;
+double move = 0;
 double depth = 3;
 
 /* Prototypes de fonctions */
@@ -101,13 +102,120 @@ int main(int argc, char **argv){
     return 0;
 }
 
+void finger(GLUquadricObj * arm, int inverse, double radius, double space, double length, int rotation){
+	glPushMatrix();
+		glRotatef(rotation, 0, 1, 0);
+		glTranslatef(0, 0, space);
+		gluCylinder(arm, 2.5 * (radius - space),  1.5 * (radius - space), length * 0.4, 30, 30);
+		glPushMatrix();
+			
+			glTranslatef(0, 0, length * 0.4 + space);
+			gluSphere(arm, 1.5 * (radius - space), 40, 30);
+			glPushMatrix();	
+				if(bat >= 0 && bat < M_PI / 2){
+					glRotatef(100 * inverse - 100 * inverse * sin(bat), 1, 0, 1);
+				}else if(bat >= 3 * M_PI / 2 && bat < 2 * M_PI){
+					glRotatef(100 * inverse * sin(bat - (3 * M_PI / 2) ), 1, 0, 1);
+				}
+				glRotatef(-10, 0, 1, 0);
+				glTranslatef(0, 0, space);
+				gluCylinder(arm, 1.5 * (radius - space), radius, length * 0.6, 30, 30);
+			glPopMatrix();
+		glPopMatrix();
+	glPopMatrix();
+}
 
+void leftArm(int inverse, double bodyLength){
+		double radius = 0.25;
+		double length = 1;
+		double space = 0.05;
+		// leftArm
+		glPushMatrix();
+			GLUquadricObj *leftArm = gluNewQuadric();
+			glPushMatrix();
+                glRotatef(sin(bat) * 20 * inverse, 0, 0, 1);				
+				glTranslatef(radius * 2 + space, 0, 0.80 * bodyLength);
+				gluSphere(leftArm, radius, 40, 30);
+				glPushMatrix();
+					glRotatef(70 + sin(bat) * 35, 0, 1, 0);
+					glRotatef(-70 *inverse, 1, 0, 0); 
+					glTranslatef(0, 0, (radius / 2) + space);
 
+					length = radius * 3;
+					radius = radius - space;
+					
+					gluCylinder(leftArm, radius, radius / 2, length, 30, 30);
+					glPushMatrix();
+						glTranslatef(0, 0, length + space);
 
+						space = 0.02;
+						radius = radius / 2 + space;
+
+						gluSphere(leftArm, radius, 40, 30);
+						glPushMatrix();
+							if(!(bat >= 0 && bat < M_PI))
+							{
+								glRotatef(-120 * inverse * sin(bat), 1, 0, 0);
+								glRotatef(15 * sin(bat), 0, 1, 0);
+							}
+							length = length * 2.5;
+							radius = radius / 2 + space / 2;
+							
+							glTranslatef(0, 0, space);
+							gluCylinder(leftArm, 2 * (radius - space), radius - space, length, 30, 30);
+							glPushMatrix();
+							
+								glRotatef(-25 * inverse - sin(bat) * inverse * 15 , 0, 0, 1);
+								
+								glTranslatef(0, 0, length + space);
+								gluSphere(leftArm, radius - space, 40, 30);
+								
+								space = space / 5;
+								radius = radius / 5 + space;
+
+								// Plus près du corps
+								finger(leftArm, inverse, radius, space, length, 90);
+								// Milieu
+								finger(leftArm,inverse, radius, space, length * 1.05, 60);
+								// Plus loin du corps
+								finger(leftArm,inverse, radius, space, length * 1.65, 20);
+
+							glPopMatrix();
+						glPopMatrix();
+					glPopMatrix();
+				glPopMatrix();
+			glPopMatrix();
+		glPopMatrix();
+}
+
+void rightArm(double bodyLength){
+	glPushMatrix();
+		glRotatef(180, 0, 1, 0);
+		glRotatef(180, 1, 0, 0);
+		leftArm(-1, bodyLength);
+	glPopMatrix();
+}
+
+void animation(){
+	move += 0.2;
+	bat += 0.1;
+	if(bat > 2 * M_PI){
+		bat = 0;
+	}
+	if(move > 100){
+		move = 0;
+	}
+}
 
 void affichage(){
 
 	int i,j;
+	double headWidth = 0.5;
+	double bodyBottomWidth = 0.4;
+	double bodyLength = 1.5;
+		
+	
+	
     GLfloat lightColor0[] = {1.0f, 1.0f, 1.0f, 1.0f};
 	GLfloat lightPos0[] = {0.0f, 1.2f, 1.0f, 1.0f};
 	GLfloat ambientColor[] = {0.2f, 0.2f, 0.2f, 1.0f};   // Color (0.2, 0.2, 0.2)
@@ -134,128 +242,44 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
     glLightfv(GL_LIGHT0, GL_SPECULAR, lightColor0);
     glMaterialfv(GL_FRONT, GL_SHININESS, low_shininess);
+	
     glPushMatrix();
+		// Déplacement vertical
+		glTranslatef(0, -2 *sin(bat), 0);
+		// Déplacement horizontal 
+		glTranslatef(0, 0, move); 
+		// Inclinaison
+		glRotatef(-20, 1, 0, 0);
+
 		glColor3f(0.3, 0.3, 0.3);
 
-		// Torso
+		// Body
 		glPushMatrix();
-			GLUquadricObj *torso = gluNewQuadric();
+			GLUquadricObj *body = gluNewQuadric();
 			// head
 			glPushMatrix();
-				glTranslatef(0, 0, 1.75);
-				gluSphere(torso, 0.5, 40, 30);
+				glTranslatef(0, 0, headWidth + bodyLength + 0.25);
+				gluSphere(body, headWidth, 40, 30);
 			glPopMatrix();
 
 			// torso
-			gluCylinder(torso, 0.5, 0.5, 1.0, 30, 30);
+			gluCylinder(body, bodyBottomWidth, headWidth, bodyLength, 30, 30); // 1.5
 
 			// torso-top
 			glPushMatrix();
-				glTranslatef(0, 0, 1);
-				gluDisk(torso, 0, 0.5, 30, 1);
+				glTranslatef(0, 0, bodyLength);
+				gluDisk(body, 0, headWidth, 30, 1);
 			glPopMatrix();
-
-			// torso-bottom
-			gluDisk(torso, 0, 0.5, 30, 1);
 
 			// bottom
 			glPushMatrix();
-				glTranslatef(0, 0, -0.5);
-				gluSphere(torso, 0.35, 40, 30);
+				gluSphere(body, bodyBottomWidth, 40, 30);
 			glPopMatrix();
 		glPopMatrix();
 
 		// Arms
-		// leftArm
-		glPushMatrix();
-			GLUquadricObj *leftArm = gluNewQuadric();
-			glPushMatrix();
-                glRotatef(sin(bat)*20, 0,0,1);
-				glTranslatef(0.75, 0, 0.80);
-				gluSphere(leftArm, 0.25, 40, 30);
-				glPushMatrix();
-					glRotatef(150, 0, 1, 0);
-					glTranslatef(0, 0, 0.3);
-					gluCylinder(leftArm, 0.125, 0.125, 0.75, 30, 30);
-					glPushMatrix();
-						glTranslatef(0, 0, 0.95);
-						gluSphere(leftArm, 0.15, 40, 30);
-						glPushMatrix();
-							glRotatef(-120, 0, 1, 0);
-							glTranslatef(0, 0, 0.15);
-							gluCylinder(leftArm, 0.125, 0.125, 2, 30, 30);
-							glPushMatrix();
-								glTranslatef(0, 0, 2.20);
-								gluSphere(leftArm, 0.15, 40, 30);
-								glPushMatrix();
-									glRotatef(100, 0, 1, 0);
-									glTranslatef(0, 0, 0.15);
-									gluCylinder(leftArm, 0.125, 0.125, 1.6, 30, 30);
-								glPopMatrix();
-								glPushMatrix();
-									glRotatef(130, 0, 1, 0);
-									glTranslatef(0, 0, 0.15);
-									gluCylinder(leftArm, 0.125, 0.125, 2, 30, 30);
-								glPopMatrix();
-								glPushMatrix();
-									glRotatef(60, 0, 1, 0);
-									glTranslatef(0, 0, 0.15);
-									gluCylinder(leftArm, 0.125, 0.125, 2, 30, 30);
-								glPopMatrix();
-							glPopMatrix();
-						glPopMatrix();
-					glPopMatrix();
-				glPopMatrix();
-			glPopMatrix();
-		glPopMatrix();
-
-		// rightArm
-		glPushMatrix();
-			glRotatef(180, 0, 1, 0);
-			glRotatef(180, 1, 0, 0);
-			GLUquadricObj *rightArm = gluNewQuadric();
-			glPushMatrix();
-                glRotatef(sin(bat)*-20, 0,0,1);
-				glTranslatef(0.75, 0, 0.80);
-				gluSphere(leftArm, 0.25, 40, 30);
-				glPushMatrix();
-					glRotatef(150, 0, 1, 0);
-					glTranslatef(0, 0, 0.3);
-					gluCylinder(leftArm, 0.125, 0.125, 0.75, 30, 30);
-					glPushMatrix();
-						glTranslatef(0, 0, 0.95);
-						gluSphere(leftArm, 0.15, 40, 30);
-						glPushMatrix();
-							glRotatef(-120, 0, 1, 0);
-							glTranslatef(0, 0, 0.15);
-							gluCylinder(leftArm, 0.125, 0.125, 2, 30, 30);
-							glPushMatrix();
-								glTranslatef(0, 0, 2.20);
-								gluSphere(leftArm, 0.15, 40, 30);
-								glPushMatrix();
-									glRotatef(100, 0, 1, 0);
-									glTranslatef(0, 0, 0.15);
-									gluCylinder(leftArm, 0.125, 0.125, 1.6, 30, 30);
-								glPopMatrix();
-								glPushMatrix();
-									glRotatef(130, 0, 1, 0);
-									glTranslatef(0, 0, 0.15);
-									gluCylinder(leftArm, 0.125, 0.125, 2, 30, 30);
-								glPopMatrix();
-								glPushMatrix();
-									glRotatef(60, 0, 1, 0);
-									glTranslatef(0, 0, 0.15);
-									gluCylinder(leftArm, 0.125, 0.125, 2, 30, 30);
-								glPopMatrix();
-							glPopMatrix();
-						glPopMatrix();
-					glPopMatrix();
-				glPopMatrix();
-			glPopMatrix();
-		glPopMatrix();
-		glPushMatrix();
-		glPopMatrix();
-
+		leftArm(1, bodyLength);
+		rightArm(bodyLength);
 
 		// Legs
 		glPushMatrix();
@@ -264,9 +288,9 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 
     glPopMatrix();
 
-	// On force l'affichage du r�sultat
+	// On force l'affichage du resultat
 	glFlush();
-	// On �change les buffers
+	// On echange les buffers
 	glutSwapBuffers();
 
 }
@@ -286,7 +310,7 @@ void clavier(unsigned char touche,int x,int y){
             glutPostRedisplay();
             break;
         case 'b':
-            bat+=0.1;
+			animation();
             glutPostRedisplay();
             break;
 		case 'q':/* Quitter le programme */
