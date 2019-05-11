@@ -143,7 +143,7 @@ void leftArm(int inverse, double bodyLength){
 
 					length = radius * 3;
 					radius = radius - space;
-					
+					//premier cylindre (bras)
 					gluCylinder(leftArm, radius, radius / 2, length, 30, 30);
 					glPushMatrix();
 						glTranslatef(0, 0, length + space);
@@ -244,8 +244,8 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
     glMaterialfv(GL_FRONT, GL_SHININESS, low_shininess);
 	
     glPushMatrix();
-		// Déplacement vertical
-		glTranslatef(0, -2 *sin(bat), 0);
+		// Déplacement vertical à commenter pour immobiliser
+		glTranslatef(0, -2 *sin(bat), 0); //BAT  est remis à zero 
 		// Déplacement horizontal 
 		glTranslatef(0, 0, move); 
 		// Inclinaison
