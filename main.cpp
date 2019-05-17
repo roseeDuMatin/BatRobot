@@ -108,10 +108,10 @@ void finger(GLUquadricObj * arm, int inverse, double radius, double space, doubl
 		glTranslatef(0, 0, space);
 		gluCylinder(arm, 2.5 * (radius - space),  1.5 * (radius - space), length * 0.4, 30, 30);
 		glPushMatrix();
-			
+
 			glTranslatef(0, 0, length * 0.4 + space);
 			gluSphere(arm, 1.5 * (radius - space), 40, 30);
-			glPushMatrix();	
+			glPushMatrix();
 				if(bat >= 0 && bat < M_PI / 2){
 					glRotatef(100 * inverse - 100 * inverse * sin(bat), 1, 0, 1);
 				}else if(bat >= 3 * M_PI / 2 && bat < 2 * M_PI){
@@ -133,12 +133,12 @@ void leftArm(int inverse, double bodyLength){
 		glPushMatrix();
 			GLUquadricObj *leftArm = gluNewQuadric();
 			glPushMatrix();
-                glRotatef(sin(bat) * 20 * inverse, 0, 0, 1);				
+                glRotatef(sin(bat) * 20 * inverse, 0, 0, 1);
 				glTranslatef(radius * 2 + space, 0, 0.80 * bodyLength);
 				gluSphere(leftArm, radius, 40, 30);
 				glPushMatrix();
 					glRotatef(70 + sin(bat) * 35, 0, 1, 0);
-					glRotatef(-70 *inverse, 1, 0, 0); 
+					glRotatef(-70 *inverse, 1, 0, 0);
 					glTranslatef(0, 0, (radius / 2) + space);
 
 					length = radius * 3;
@@ -160,16 +160,16 @@ void leftArm(int inverse, double bodyLength){
 							}
 							length = length * 2.5;
 							radius = radius / 2 + space / 2;
-							
+
 							glTranslatef(0, 0, space);
 							gluCylinder(leftArm, 2 * (radius - space), radius - space, length, 30, 30);
 							glPushMatrix();
-							
+
 								glRotatef(-25 * inverse - sin(bat) * inverse * 15 , 0, 0, 1);
-								
+
 								glTranslatef(0, 0, length + space);
 								gluSphere(leftArm, radius - space, 40, 30);
-								
+
 								space = space / 5;
 								radius = radius / 5 + space;
 
@@ -213,9 +213,9 @@ void affichage(){
 	double headWidth = 0.5;
 	double bodyBottomWidth = 0.4;
 	double bodyLength = 1.5;
-		
-	
-	
+
+
+
     GLfloat lightColor0[] = {1.0f, 1.0f, 1.0f, 1.0f};
 	GLfloat lightPos0[] = {0.0f, 1.2f, 1.0f, 1.0f};
 	GLfloat ambientColor[] = {0.2f, 0.2f, 0.2f, 1.0f};   // Color (0.2, 0.2, 0.2)
@@ -242,12 +242,12 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
     glLightfv(GL_LIGHT0, GL_SPECULAR, lightColor0);
     glMaterialfv(GL_FRONT, GL_SHININESS, low_shininess);
-	
+
     glPushMatrix();
 		// Déplacement vertical à commenter pour immobiliser
-		glTranslatef(0, -2 *sin(bat), 0); //BAT  est remis à zero 
-		// Déplacement horizontal 
-		glTranslatef(0, 0, move); 
+		glTranslatef(0, -2 *sin(bat), 0); //BAT  est remis à zero
+		// Déplacement horizontal
+		glTranslatef(0, 0, move);
 		// Inclinaison
 		glRotatef(-20, 1, 0, 0);
 
