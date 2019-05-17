@@ -245,9 +245,9 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 	
     glPushMatrix();
 		// Déplacement vertical à commenter pour immobiliser
-		glTranslatef(0, -2 *sin(bat), 0); //BAT  est remis à zero 
+		//glTranslatef(0, -2 *sin(bat), 0); //BAT  est remis à zero 
 		// Déplacement horizontal 
-		glTranslatef(0, 0, move); 
+		//glTranslatef(0, 0, move); 
 		// Inclinaison
 		glRotatef(-20, 1, 0, 0);
 
