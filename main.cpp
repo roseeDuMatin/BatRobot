@@ -173,12 +173,14 @@ void leftArm(int inverse, double bodyLength){
 								space = space / 5;
 								radius = radius / 5 + space;
 
+
 								// Plus près du corps
 								finger(leftArm, inverse, radius, space, length, 90);
 								// Milieu
 								finger(leftArm,inverse, radius, space, length * 1.05, 60);
 								// Plus loin du corps
 								finger(leftArm,inverse, radius, space, length * 1.65, 20);
+
 
 							glPopMatrix();
 						glPopMatrix();
@@ -188,6 +190,15 @@ void leftArm(int inverse, double bodyLength){
 		glPopMatrix();
 }
 
+
+/* glBegin(GL_TRIANGLES) {
+    glPushMatrix();
+        glVertex2f(10.0, 50.0);
+        glVertex2f(50.0, 70.0);
+        glVertex2f(70.0, 10.0);
+    glPopMatrix();
+}  */
+
 void rightArm(double bodyLength){
 	glPushMatrix();
 		glRotatef(180, 0, 1, 0);
@@ -195,6 +206,32 @@ void rightArm(double bodyLength){
 		leftArm(-1, bodyLength);
 	glPopMatrix();
 }
+
+void leftLeg(int inverse, double bodyLength) {
+    double radius = 0.25/3;
+    double length = 0.75;
+    double space = 0.05;
+    // leftLeg
+    glPushMatrix();
+        GLUquadricObj *leftLeg = gluNewQuadric();
+        glPushMatrix();
+            glRotatef(150 * inverse, 1, 1, 0);
+            glTranslatef(space, 0, 3 * space);
+            //premier cylindre (jambe)
+            gluCylinder(leftLeg, radius, radius / 2, length, 30, 30);
+        glPopMatrix();
+    glPopMatrix();
+}
+
+
+void rightLeg(double bodyLength){
+	glPushMatrix();
+		glRotatef(180, 0, 1, 0);
+		glRotatef(180, 1, 1, 0);
+		leftLeg(-1, bodyLength);
+	glPopMatrix();
+}
+
 
 void animation(){
 	move += 0.2;
@@ -288,9 +325,8 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 		rightArm(bodyLength);
 
 		// Legs
-		glPushMatrix();
-
-		glPopMatrix();
+        leftLeg(1, bodyLength);
+        rightLeg(bodyLength);
 
     glPopMatrix();
 
