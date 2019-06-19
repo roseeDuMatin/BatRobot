@@ -120,9 +120,23 @@ void finger(GLUquadricObj * arm, int inverse, double radius, double space, doubl
 				glRotatef(-10, 0, 1, 0);
 				glTranslatef(0, 0, space);
 				gluCylinder(arm, 1.5 * (radius - space), radius, length * 0.6, 30, 30);
+
 			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();
+}
+
+
+void ears(double offset){
+    glBegin(GL_POLYGON);
+        glVertex3d(offset, 0.3, -0.1);
+        glVertex3d(offset, 0.4,-0.13);
+        glVertex3d(offset, 0.55, -0.15);
+        glVertex3d(offset, 0.65, 0);
+        glVertex3d(offset, 0.55, 0.15);
+        glVertex3d(offset, 0.4, 0.13);
+        glVertex3d(offset, 0.3, 0.1);
+    glEnd();
 }
 
 void eye(int inverse, double headWidth){
@@ -146,6 +160,8 @@ void head(int inverse, double headWidth, double bodyLength){
 				gluSphere(head, headWidth, 40, 30); // tete
 				eye(inverse, headWidth);
 				eye(-inverse, headWidth);
+				ears(0.3);
+				ears(-0.3);
 			glPopMatrix();
 		glPopMatrix();
 
@@ -157,6 +173,10 @@ void leftArm(int inverse, double bodyLength){
 		double radius = 0.25;
 		double length = 1;
 		double space = 0.05;
+
+		GLfloat matrixMV[16];
+		double coords[12];
+
 		// leftArm
 		glPushMatrix();
 			GLUquadricObj *leftArm = gluNewQuadric();
@@ -191,6 +211,7 @@ void leftArm(int inverse, double bodyLength){
 
 							glTranslatef(0, 0, space);
 							gluCylinder(leftArm, 2 * (radius - space), radius - space, length, 30, 30);
+
 							glPushMatrix();
 
 								glRotatef(-25 * inverse - sin(bat) * inverse * 15 , 0, 0, 1);
@@ -200,7 +221,6 @@ void leftArm(int inverse, double bodyLength){
 
 								space = space / 5;
 								radius = radius / 5 + space;
-
 
 								// Plus près du corps
 								finger(leftArm, inverse, radius, space, length, 90);
@@ -286,7 +306,7 @@ void affichage(){
 
 	// GLfloat lightColorEye1[] = {0, 0, 1.0f, 0};
 	// GLfloat lightColorEye2[] = {1.0f, 1.0f, 0, 0};
-	
+
 	// GLfloat lightPosEye1[] = {0, 0, 0, 0};
 	// GLfloat lighPosEye2[] = {0, 0 , 0, 0};
 
