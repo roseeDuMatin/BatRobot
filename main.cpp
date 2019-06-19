@@ -125,6 +125,34 @@ void finger(GLUquadricObj * arm, int inverse, double radius, double space, doubl
 	glPopMatrix();
 }
 
+void eye(int inverse, double headWidth){
+	GLUquadricObj *eye = gluNewQuadric();
+	glPushMatrix();
+		glTranslatef(0, 0, headWidth);
+		glTranslatef(0.15 * inverse, 0, 0);
+		glTranslatef(0, 0.15 , 0);
+		gluSphere(eye, headWidth / 10,  40, 30); // tete
+	glPopMatrix();
+}
+
+void head(int inverse, double headWidth, double bodyLength){
+	glPushMatrix();
+		GLUquadricObj *head = gluNewQuadric();
+		glPushMatrix();
+			glTranslatef(0, 0, bodyLength);
+			gluCylinder(head, headWidth, headWidth / 2, 0.25, 30, 30); // cou
+			glPushMatrix();
+				glTranslatef(0, 0, headWidth + 0.25);
+				gluSphere(head, headWidth, 40, 30); // tete
+				eye(inverse, headWidth);
+				eye(-inverse, headWidth);
+			glPopMatrix();
+		glPopMatrix();
+
+	glPopMatrix();
+
+}
+
 void leftArm(int inverse, double bodyLength){
 		double radius = 0.25;
 		double length = 1;
@@ -255,6 +283,13 @@ void affichage(){
 
     GLfloat lightColor0[] = {1.0f, 1.0f, 1.0f, 1.0f};
 	GLfloat lightPos0[] = {0.0f, 1.2f, 1.0f, 1.0f};
+
+	// GLfloat lightColorEye1[] = {0, 0, 1.0f, 0};
+	// GLfloat lightColorEye2[] = {1.0f, 1.0f, 0, 0};
+	
+	// GLfloat lightPosEye1[] = {0, 0, 0, 0};
+	// GLfloat lighPosEye2[] = {0, 0 , 0, 0};
+
 	GLfloat ambientColor[] = {0.2f, 0.2f, 0.2f, 1.0f};   // Color (0.2, 0.2, 0.2)
 	GLfloat low_shininess[] = {5.0};
 
@@ -273,7 +308,7 @@ void affichage(){
               0,1,0);
     //glTranslatef(0.0f, 0.0f, -depth);
 
-glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
@@ -287,10 +322,6 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 		// Déplacement horizontal
 		glTranslatef(0, 0, move);
 
-		//glTranslatef(0, -2 *sin(bat), 0); //BAT  est remis à zero
-		// Déplacement horizontal
-		//glTranslatef(0, 0, move);
-
 		// Inclinaison
 		glRotatef(-20, 1, 0, 0);
 
@@ -300,10 +331,7 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 		glPushMatrix();
 			GLUquadricObj *body = gluNewQuadric();
 			// head
-			glPushMatrix();
-				glTranslatef(0, 0, headWidth + bodyLength + 0.25);
-				gluSphere(body, headWidth, 40, 30);
-			glPopMatrix();
+			head(1, headWidth, bodyLength);
 
 			// torso
 			gluCylinder(body, bodyBottomWidth, headWidth, bodyLength, 30, 30); // 1.5
