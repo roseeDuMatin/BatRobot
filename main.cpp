@@ -207,6 +207,30 @@ void rightArm(double bodyLength){
 	glPopMatrix();
 }
 
+void toe(GLUquadricObj * leg, int inverse, double radius, double space, double length, int rotation){
+	glPushMatrix();
+		glRotatef(rotation, 0, 1, 0);
+		glTranslatef(0, 0, space);
+		gluCylinder(leg, 2.5 * (radius - space),  1.5 * (radius - space), length * 0.4, 30, 30);
+		glPushMatrix();
+
+			glTranslatef(0, 0, length * 0.4 + space);
+			gluSphere(leg, 1.5 * (radius - space), 40, 30);
+			glPushMatrix();
+				if(bat >= 0 && bat < M_PI / 2){
+					glRotatef(100 * inverse - 100 * inverse * sin(bat), 1, 0, 1);
+				}else if(bat >= 3 * M_PI / 2 && bat < 2 * M_PI){
+					glRotatef(100 * inverse * sin(bat - (3 * M_PI / 2) ), 1, 0, 1);
+				}
+				glRotatef(-10, 0, 1, 0);
+				glTranslatef(0, 0, space);
+				gluCylinder(leg, 1.5 * (radius - space), radius, length * 0.6, 30, 30);
+			glPopMatrix();
+		glPopMatrix();
+	glPopMatrix();
+}
+
+
 void leftLeg(int inverse, double bodyLength) {
     double radius = 0.25/3;
     double length = 0.75;
@@ -219,6 +243,15 @@ void leftLeg(int inverse, double bodyLength) {
             glTranslatef(space, 0, 3 * space);
             //premier cylindre (jambe)
             gluCylinder(leftLeg, radius, radius / 2, length, 30, 30);
+
+                                // Plus près du corps
+								toe(leftLeg, inverse, (radius / 2.5), space, length, 90);
+								// Milieu
+								toe(leftLeg,inverse, (radius / 2.5), space, length, 60);
+								// Plus loin du corps
+								toe(leftLeg,inverse, (radius / 2.5), space, length, 20);
+
+
         glPopMatrix();
     glPopMatrix();
 }
@@ -231,7 +264,6 @@ void rightLeg(double bodyLength){
 		leftLeg(-1, bodyLength);
 	glPopMatrix();
 }
-
 
 void animation(){
 	move += 0.2;
@@ -321,8 +353,8 @@ glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientColor);
 		glPopMatrix();
 
 		// Arms
-		leftArm(1, bodyLength);
-		rightArm(bodyLength);
+		//leftArm(1, bodyLength);
+	//	rightArm(bodyLength);
 
 		// Legs
         leftLeg(1, bodyLength);
