@@ -138,6 +138,13 @@ void ears(double offset){
         glVertex3d(offset, 0.3, 0.1);
     glEnd();
 }
+void tooth(double offset){
+    glBegin(GL_TRIANGLES);
+        glVertex3d(offset, -0.2, 0.48);
+        glVertex3d(offset+0.05, -0.1,0.48);
+        glVertex3d(offset-0.05, -0.1, 0.48);
+    glEnd();
+}
 
 void eye(int inverse, double headWidth){
 	GLUquadricObj *eye = gluNewQuadric();
@@ -162,6 +169,8 @@ void head(int inverse, double headWidth, double bodyLength){
 				eye(-inverse, headWidth);
 				ears(0.3);
 				ears(-0.3);
+				tooth(0.15);
+				tooth(-0.15);
 			glPopMatrix();
 		glPopMatrix();
 
@@ -323,8 +332,8 @@ void animation(){
 	if(bat > 2 * M_PI){
 		bat = 0;
 	}
-	if(move > 100){
-		move = 0;
+	if(move > 10){
+		move = -10;
 	}
 }
 
