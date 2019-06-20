@@ -255,31 +255,67 @@ void rightArm(double bodyLength){
 	glPopMatrix();
 }
 
+
+void fingerLeg(GLUquadricObj * leg, int inverse, double radius, double space, double length, int rotation){
+	glPushMatrix();
+		length = length * 1.5;
+		radius = radius * 1.5;
+		space = space * 1.5;
+		glRotatef(rotation, 0, 1, 0);
+		glTranslatef(0, 0, space);
+		gluCylinder(leg, 2.5 * (radius - space),  1.5 * (radius - space), length * 0.4, 30, 30);
+		glPushMatrix();
+
+			glTranslatef(0, 0, length * 0.4 + space);
+			gluSphere(leg, 1.5 * (radius - space), 40, 30);
+			glPushMatrix();
+				finger(leg, inverse, radius / 1.5, space / 1.5 , length / 3, -20);
+				finger(leg, inverse, radius / 1.5, space / 1.5 , length / 3, -50);
+				finger(leg, inverse, radius / 1.5, space / 1.5 , length / 3, -80);
+			glPopMatrix();
+		glPopMatrix();
+	glPopMatrix();
+}
+
 void leftLeg(int inverse, double bodyLength) {
     double radius = 0.25/3;
     double length = 0.75;
     double space = 0.05;
-    // leftLeg
+
+    // Left Leg
     glPushMatrix();
         GLUquadricObj *leftLeg = gluNewQuadric();
         glPushMatrix();
             glRotatef(150 * inverse, 1, 1, 0);
-            glTranslatef(space, 0, 3 * space);
-            //premier cylindre (jambe)
-            gluCylinder(leftLeg, radius, radius / 2, length, 30, 30);
+            glTranslatef(space, 0,  0.25 * bodyLength);//3 * space +
+			gluSphere(leftLeg, radius * 1.5, 40, 30);
+
+			length = length/ 1.5;
+            gluCylinder(leftLeg, radius, radius / 2, length * 1.05, 30, 30);
+
+			glPushMatrix();
+				glRotatef(-25 * inverse  , 0, 0, 1);
+
+				glTranslatef(0, 0, length + space);
+				gluSphere(leftLeg, radius - space, 40, 30);
+
+				space = space / 5;
+				radius = radius / 5 + space;
+
+				fingerLeg(leftLeg, inverse, radius / 1.5, space / 1.5 , length, -50);
+			glPopMatrix();
         glPopMatrix();
     glPopMatrix();
 }
 
 
+
 void rightLeg(double bodyLength){
 	glPushMatrix();
-		glRotatef(180, 0, 1, 0);
-		glRotatef(180, 1, 1, 0);
+		glRotatef(-45, 1, 0, 0);
 		leftLeg(-1, bodyLength);
 	glPopMatrix();
 }
-
 
 void animation(){
 	move += 0.2;
