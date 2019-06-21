@@ -1,0 +1,270 @@
+# depslib dependency file v1.0
+1395931851 source:c:\users\fabien\dropbox\textures opengl avec soil\implémentation soil\main.cpp
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+	"Camera.h"
+
+976663372 c:\users\fabien\dropbox\textures opengl avec soil\implémentation soil\include\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1215447208 c:\users\fabien\dropbox\textures opengl avec soil\implémentation soil\include\soil.h
+
+1395960066 c:\users\fabien\dropbox\textures opengl avec soil\implémentation soil\include\camera.h
+
+1395997219 source:c:\users\fabien\dropbox\textures opengl avec soil\implémentation soil\src\camera.cpp
+	"Camera.h"
+	<math.h>
+
+1395931448 source:c:\users\fabien\dropbox\textures opengl avec soil\implémentation soil\src\skybox.cpp
+	"Skybox.h"
+
+1395931448 c:\users\fabien\dropbox\textures opengl avec soil\implémentation soil\include\skybox.h
+
+1395932074 source:e:\dropbox\textures opengl avec soil\implémentation soil\main.cpp
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+	"Camera.h"
+
+976663372 e:\dropbox\textures opengl avec soil\implémentation soil\include\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1215447208 e:\dropbox\textures opengl avec soil\implémentation soil\include\soil.h
+
+1395960066 e:\dropbox\textures opengl avec soil\implémentation soil\include\camera.h
+
+1395958710 source:e:\dropbox\textures opengl avec soil\implémentation soil\src\camera.cpp
+	"Camera.h"
+	<math.h>
+
+1395959388 source:e:\dropbox\textures opengl avec soil\implémentation soil\src\main.cpp
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+	"Camera.h"
+	"Map.h"
+
+1395959423 e:\dropbox\textures opengl avec soil\implémentation soil\include\map.h
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+	"Camera.h"
+
+1395959690 source:e:\dropbox\textures opengl avec soil\implémentation soil\src\map.cpp
+	"Map.h"
+
+1396017310 source:c:\users\fabien\dropbox\textures opengl avec soil\implémentation soil\src\block.cpp
+	"Block.h"
+
+1396017089 c:\users\fabien\dropbox\textures opengl avec soil\implémentation soil\include\block.h
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+
+1396017016 source:c:\users\fabien\dropbox\textures opengl avec soil\implémentation soil\src\main.cpp
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+	"Camera.h"
+	"Map.h"
+
+1395959423 c:\users\fabien\dropbox\textures opengl avec soil\implémentation soil\include\map.h
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+	"Camera.h"
+
+1396018038 source:c:\users\fabien\dropbox\textures opengl avec soil\implémentation soil\src\map.cpp
+	"Map.h"
+	"Block.h"
+
+1396018710 source:c:\users\marc\desktop\textures opengl avec soil\textures opengl avec soil\implémentation soil\src\block.cpp
+	"Block.h"
+
+1396017090 c:\users\marc\desktop\textures opengl avec soil\textures opengl avec soil\implémentation soil\include\block.h
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+
+976663372 c:\users\marc\desktop\textures opengl avec soil\textures opengl avec soil\implémentation soil\include\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1215450808 c:\users\marc\desktop\textures opengl avec soil\textures opengl avec soil\implémentation soil\include\soil.h
+
+1395997220 source:c:\users\marc\desktop\textures opengl avec soil\textures opengl avec soil\implémentation soil\src\camera.cpp
+	"Camera.h"
+	<math.h>
+
+1395960066 c:\users\marc\desktop\textures opengl avec soil\textures opengl avec soil\implémentation soil\include\camera.h
+
+1396017018 source:c:\users\marc\desktop\textures opengl avec soil\textures opengl avec soil\implémentation soil\src\main.cpp
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+	"Camera.h"
+	"Map.h"
+
+1395959424 c:\users\marc\desktop\textures opengl avec soil\textures opengl avec soil\implémentation soil\include\map.h
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+	"Camera.h"
+
+1396018930 source:c:\users\marc\desktop\textures opengl avec soil\textures opengl avec soil\implémentation soil\src\map.cpp
+	"Map.h"
+	"Block.h"
+
+1396220518 source:c:\users\marc\desktop\implémentation soil\src\block.cpp
+	"Block.h"
+
+1396220518 c:\users\marc\desktop\implémentation soil\include\block.h
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+
+976663372 c:\users\marc\desktop\implémentation soil\include\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1215450808 c:\users\marc\desktop\implémentation soil\include\soil.h
+
+1395997220 source:c:\users\marc\desktop\implémentation soil\src\camera.cpp
+	"Camera.h"
+	<math.h>
+
+1395960066 c:\users\marc\desktop\implémentation soil\include\camera.h
+
+1396017018 source:c:\users\marc\desktop\implémentation soil\src\main.cpp
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+	"Camera.h"
+	"Map.h"
+
+1395959424 c:\users\marc\desktop\implémentation soil\include\map.h
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+	"Camera.h"
+
+1396220566 source:c:\users\marc\desktop\implémentation soil\src\map.cpp
+	"Map.h"
+	"Block.h"
+
+1396224118 source:c:\wamp64\www\2a\implémentation soil\src\block.cpp
+	"Block.h"
+
+1558107091 c:\wamp64\www\2a\implémentation soil\include\block.h
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+
+976666972 c:\wamp64\www\2a\implémentation soil\include\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1215454408 c:\wamp64\www\2a\implémentation soil\include\soil.h
+
+1396000820 source:c:\wamp64\www\2a\implémentation soil\src\camera.cpp
+	"Camera.h"
+	<math.h>
+
+1395963666 c:\wamp64\www\2a\implémentation soil\include\camera.h
+
+1396020618 source:c:\wamp64\www\2a\implémentation soil\src\main.cpp
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+	"Camera.h"
+	"Map.h"
+
+1395963024 c:\wamp64\www\2a\implémentation soil\include\map.h
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+	"Camera.h"
+
+1558107304 source:c:\wamp64\www\2a\implémentation soil\src\batrobot.cpp
+	"BatRobot.h"
+
+1558107290 c:\wamp64\www\2a\implémentation soil\include\batrobot.h
+
+1558106884 source:c:\wamp64\www\2a\implémentation soil\src\map.cpp
+	"Map.h"
+	"Block.h"
+
+1396224118 source:c:\users\brete\documents\projects\esgi2\info\implémentation soil\src\block.cpp
+	"Block.h"
+
+1558107091 c:\users\brete\documents\projects\esgi2\info\implémentation soil\include\block.h
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+
+976666972 c:\users\brete\documents\projects\esgi2\info\implémentation soil\include\glut.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1215454408 c:\users\brete\documents\projects\esgi2\info\implémentation soil\include\soil.h
+
+1396000820 source:c:\users\brete\documents\projects\esgi2\info\implémentation soil\src\camera.cpp
+	"Camera.h"
+	<math.h>
+
+1395963666 c:\users\brete\documents\projects\esgi2\info\implémentation soil\include\camera.h
+
+1561110638 source:c:\users\brete\documents\projects\esgi2\info\implémentation soil\src\main.cpp
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+	"Camera.h"
+	"Map.h"
+	<math.h>
+
+1395963024 c:\users\brete\documents\projects\esgi2\info\implémentation soil\include\map.h
+	<GL/gl.h>
+	<GL/glu.h>
+	"glut.h"
+	"SOIL.h"
+	"Camera.h"
+
+1561110855 source:c:\users\brete\documents\projects\esgi2\info\implémentation soil\src\map.cpp
+	"Map.h"
+	"Block.h"
+
